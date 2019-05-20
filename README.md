@@ -1,9 +1,9 @@
 # ponee
-> A lightweight Django template
+> A lightweight Django template ready for Heroku
 
 ## Motivation
 
-Loosely inspired by django-cookiecutter, ponnee is a lightweight Django template without too many assumptions.
+Loosely inspired by the beloved django-cookiecutter, ponnee is a lightweight Django template without too many assumptions.
 
 ## What's included
 
@@ -15,6 +15,8 @@ Loosely inspired by django-cookiecutter, ponnee is a lightweight Django template
 - Security settings
 - Heroku support with [django-heroku](https://github.com/heroku/django-heroku)
 - Testing and coverage
+
+Ponee uses sqlite3 for development but you can easily switch to PostgreSQL by tweaking `settings.base.py`.
 
 ## Installation
 
@@ -33,8 +35,29 @@ Then install the template:
 django-admin startproject \ 
     --template https://github.com/valentinogagliardi/ponee/archive/master.zip
     --name=Procfile
-    --extension=py .
+    --extension=py,example yournewproject .
 ```
+
+Install the dependencies:
+
+```bash
+pip install -r ./requirements/dev.txt
+```
+
+Copy the example env to `.env` and adjust the variables as you wish:
+
+```bash
+mv .env.example .env
+```
+
+Before starting make the migrations for the custom User:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+and your good to runserver!
 
 ## Environment variables
 
@@ -42,12 +65,40 @@ See `.env.example` for a complete list
 
 ## Deploy on Heroku
 
-TODO
-
-## Test
+Before starting off you should have a Git repo in your project folder:
 
 ```bash
-pip install -r ./requirements/dev.txt
+git init
 ```
+
+Login on Heroku with the Heroku toolbelt:
+
+```bash
+heroku login
+```
+
+Create a new app (you can change the name later):
+
+```bash
+heroku create
+```
+
+Copy the example `.env.prod.example` to `.env.prod` and run:
+
+```bash
+python configure_prod_envs.py
+```
+
+The script reads all the env variables from `.env.prod` and runs `heroku config:set` for each one.
+
+Finally make a commit and push the code:
+
+```bash
+git add .
+git commit -m "First commit"
+git push heroku master
+```
+
+## Test
 
 TODO
