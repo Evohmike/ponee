@@ -16,10 +16,10 @@ def config_set():
     if not os.path.isfile(ENV_PATH):
         raise FileNotFoundError(f'{ENV} does not exists. Create the file and try again')
     if not os.path.exists(GIT_REPO):
-        raise OSError(f'{GIT_REPO} is not a valid Git repo remote. Create a Git repo and try again')
+        raise OSError(f'{GIT_REPO} is not a valid Git repo. Create a Git repo and try again')
     with open(ENV_PATH, encoding='utf-8') as fp:
         for _, line in enumerate(fp):
-            subprocess.run([HEROKU_TOOLBELT, "config:set", line.split()])
+            subprocess.run([HEROKU_TOOLBELT, "config:set", line.strip()])
 
 
 if __name__ == '__main__':
