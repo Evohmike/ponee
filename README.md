@@ -33,8 +33,8 @@ Then install the template:
 
 ```bash
 django-admin startproject \ 
-    --template https://github.com/valentinogagliardi/ponee/archive/master.zip
-    --name=Procfile
+    --template https://github.com/valentinogagliardi/ponee/archive/master.zip \
+    --name=Procfile \
     --extension=py,example yournewproject .
 ```
 
@@ -50,7 +50,7 @@ Copy the example env to `.env` and adjust the variables as you wish:
 mv .env.example .env
 ```
 
-Before starting make the migrations for the custom User:
+Before starting off make the migrations for the custom User:
 
 ```bash
 python manage.py makemigrations
@@ -80,7 +80,7 @@ heroku login
 Create a new app (you can change the name later):
 
 ```bash
-heroku create
+heroku apps:create --region eu
 ```
 
 Copy the example `.env.prod.example` to `.env.prod` and run:
