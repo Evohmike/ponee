@@ -101,4 +101,15 @@ git push heroku master
 
 ## Test
 
-TODO
+Running tests:
+
+```bash
+python manage.py test
+```
+
+Running tests with coverage:
+
+```bash
+coverage run --omit='*/venv/*' manage.py test
+coverage report
+```
